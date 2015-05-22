@@ -150,6 +150,11 @@ str_reserve(struct mystr* p_str, unsigned int res_len)
 {
   /* Reserve space for the trailing zero as well. */
   res_len++;
+  if(res_len == 0)
+  {
+    bug("integer overflow");
+  }
+  
   if (res_len > p_str->alloc_bytes)
   {
     p_str->p_buf = vsf_sysutil_realloc(p_str->p_buf, res_len);
